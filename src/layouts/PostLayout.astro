@@ -1,0 +1,211 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import { Icon } from "astro-icon/components";
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+const { frontmatter, headings } = Astro.props;
+---
+
+<style is:global>
+  header,
+  footer {
+    grid-column: 1 / -1;
+  }
+</style>
+
+<style>
+  :root {
+    --gutter: 2rem;
+    --main-max-width: 80ch;
+    --aside-width: 20rem;
+    --aside-top: 4em;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a:hover {
+    color: blue;
+  }
+
+  #root {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, var(--main-max-width)) 1fr;
+    gap: var(--gutter);
+    align-items: start;
+  }
+
+  main {
+    grid-column: 2 / 3;
+    max-width: var(--main-max-width);
+    width: 100%;
+  }
+
+  aside {
+    grid-column: 1 / 2;
+    position: sticky;
+    top: var(--aside-top);
+    justify-self: center;
+  }
+
+  aside > div {
+    max-width: var(--aside-width);
+  }
+
+  @media (max-width: 880px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    main {
+      grid-column: auto;
+    }
+
+    aside {
+      grid-column: auto;
+      position: static;
+    }
+  }
+
+  aside ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .aside a {
+    text-decoration: none;
+    color: #666;
+  }
+
+  .aside a:hover {
+    color: blue;
+  }
+
+  li.level-3 {
+    margin-left: 0.5em;
+  }
+  li.level-4 {
+    margin-left: 1em;
+  }
+  li.level-5 {
+    margin-left: 1.5em;
+  }
+  li.level-6 {
+    margin-left: 2em;
+  }
+
+  .metadata {
+    display: flex;
+    gap: 1rem;
+    font-size: medium;
+    color: #666;
+  }
+
+  .metadata > div {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .metadata ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .metadata a {
+    text-decoration: none;
+    color: #666;
+  }
+
+  .metadata a:hover {
+    color: blue;
+  }
+
+  .tags li {
+    background-color: #eee;
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+</style>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>{frontmatter.title} | Neville Omangi</title>
+  </head>
+  <body>
+    <div id="root">
+      <Header />
+
+      <aside>
+        <div class="toc">
+          <h3>Contents</h3>
+
+          <ul>
+            {
+              headings.map((heading: Heading) => (
+                <li class={`level-${heading.depth}`}>
+                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+
+      <main>
+        <article>
+          <hgroup>
+            <h1>{frontmatter.title}</h1>
+
+            <div class="metadata">
+              <div class="date">
+                <!-- TODO: Use local format -->
+                <Icon name="mdi:calendar-month" title="Published On" />
+                <span title="Published On"
+                  >{frontmatter.pubDate.toString().slice(0, 10)}</span
+                >
+              </div>
+
+              <div class="tags">
+                <Icon name="mdi:tag-multiple" title="Tags" />
+
+                <ul>
+                  {
+                    frontmatter.tags.map((tag: string) => (
+                      <li>
+                        <a href={`/tags/${tag}`}>{tag}</a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          </hgroup>
+
+          <hr />
+
+          <slot />
+        </article>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>
