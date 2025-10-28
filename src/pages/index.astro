@@ -1,14 +1,62 @@
 ---
-
+import "../styles/global.css";
 ---
 
+<style>
+  .hero hgroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 5em;
+    font-weight: 900;
+  }
+</style>
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Neville Omangi</title>
-	</head>
-	<body>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>Neville Omangi</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">
+              <img src="avatar.png" alt="Avatar" width="64" height="64" />
+            </a>
+          </li>
+          <li><a href="#bio">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <main>
+        <section class="hero">
+          <hgroup>
+            <h1>Neville Omangi</h1>
+          </hgroup>
+
+          <h2>Fullstack Engineer</h2>
+
+          <div>
+            <p>
+              I am a Full-Stack & Backend Engineer with 3+ years of experience
+              architecting, developing, and deploying products for startups and
+              enterprises in finance, insurance, edtech, and beyond.
+            </p>
+          </div>
+        </section>
+      </main>
+    </header>
+  </body>
 </html>
