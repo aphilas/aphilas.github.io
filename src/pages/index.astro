@@ -1,28 +1,33 @@
 ---
-import "../styles/global.css";
 import PageLayout from "../layouts/PageLayout.astro";
+import type { Post } from "../types/index.ts";
+import PostList from "../components/PostList.astro";
+
+const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true })) as Post[];
+const sortedPosts = posts.toSorted((a: Post, b: Post) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
+const recentPosts = sortedPosts.slice(0, 3);
 ---
 
 <style>
-  .hero hgroup {
+  #bio hgroup {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .hero h1 {
+  #bio h1 {
     font-size: 5em;
     font-weight: 900;
   }
 </style>
 
 <PageLayout>
-  <section class="hero">
+  <section id="bio">
     <hgroup>
       <h1>Neville Omangi</h1>
     </hgroup>
 
-    <h2>Fullstack Engineer</h2>
+    <h3>Fullstack Engineer</h3>
 
     <div>
       <p>
@@ -30,5 +35,15 @@ import PageLayout from "../layouts/PageLayout.astro";
         developing, and deploying products for startups and enterprises alike.
       </p>
     </div>
+  </section>
+
+  <section id="posts">
+    <h2>Recent Posts</h2>
+    
+    <PostList posts={recentPosts} />
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
   </section>
 </PageLayout>

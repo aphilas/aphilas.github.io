@@ -1,12 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+
+const iconHeight = "24";
+---
+
 <style>
 footer {
-    text-align: center;
-    padding: 2em 1em;
-    font-size: 0.875rem;
-    color: #666;
+  padding: 2em 1em;
+  font-size: 0.875rem;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  max-width: 80ch;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+ul a {
+  color: #666;
+  text-decoration: none;
+}
+
+ul a:hover {
+  color: var(--link-hover-color);
 }
 </style>
 
 <footer>
-    <p>&copy; {new Date().getFullYear()} Neville Omangi. All rights reserved.</p>
+  <p>&copy; {new Date().getFullYear()} Neville Omangi. All rights reserved.</p>
+  
+  <ul>
+    <li><a href="https://mastodon.online/@aphilas"><Icon name="mdi:mastodon" title="Mastodon" height={iconHeight} width={iconHeight} /></a></li>
+    <li><a href="https://bsky.app/profile/aphilas.bsky.social"><Icon name="ri:bluesky-fill" title="Bluesky" height={iconHeight} width={iconHeight} /></a></li>
+    <li><a href="mailto:aphilas_@outlook.com"><Icon name="mdi:alternate-email" title="Email" height={iconHeight} width={iconHeight} /></a></li>
+    <li><a href="https://github.com/aphilas"><Icon name="mdi:github" title="GitHub" height={iconHeight} width={iconHeight} /></a></li>
+    <li><a href="/rss.xml"><Icon name="mdi:rss" title="RSS Feed" height={iconHeight} width={iconHeight} /></a></li>
+  </ul>
 </footer>

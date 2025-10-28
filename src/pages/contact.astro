@@ -1,0 +1,76 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { Icon } from "astro-icon/components";
+
+const iconHeight = "32";
+---
+
+<style> 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+a {
+  text-decoration: none;
+  color: var(--base-color);
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+</style>
+
+<PageLayout>
+  <section id="contact">
+    <h1>Contact</h1>
+
+    <div>
+      <h2>Social</h2>
+
+      <ul>
+        <li>
+          <Icon name="ri:bluesky-fill" title="Bluesky" height={iconHeight} width={iconHeight} />
+          <a href="https://bsky.app/profile/aphilas.bsky.social">@aphilas.bsky.social</a>
+        </li>
+        <li>
+          <Icon name="mdi:mastodon" title="Mastodon" height={iconHeight} width={iconHeight} />
+          <a href="https://mastodon.online/@aphilas">@aphilas</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Email</h2>
+      <ul>
+        <li>
+          <Icon name="mdi:alternate-email" title="Email" height={iconHeight} width={iconHeight} />
+          <a href="mailto:aphilas_@outlook.com">aphilas_@outlook.com</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Programming</h2>
+
+      <ul>
+        <li>
+          <Icon name="mdi:github" title="GitHub" height={iconHeight} width={iconHeight} />
+          <a href="https://github.com/aphilas">aphilas</a>
+        </li>
+        <li>
+          <Icon name="mdi:linkedin" title="LinkedIn" height={iconHeight} width={iconHeight} />
+          <a href="https://www.linkedin.com/in/neville-omangi-62b290173/">Neville Omangi</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</PageLayout>

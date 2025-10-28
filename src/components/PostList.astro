@@ -10,7 +10,7 @@ const { posts } = Astro.props;
 ---
 
 <style>
-h2 {
+h3 {
   margin: 0.5rem 0;
 }
 
@@ -57,7 +57,7 @@ a:hover {
 }
 
 .metadata a:hover {
-  color: blue;
+  color: var(--link-hover-color);
 }
 
 .tags li {
@@ -78,7 +78,7 @@ a:hover {
 <ul class="post-list">{posts.map((post: Post) => (
   <li>
     <a href={post.url}>
-      <h2>{post.frontmatter.title}</h2>
+      <h3>{post.frontmatter.title}</h3>
     </a>
 
     {post.frontmatter.description && (
