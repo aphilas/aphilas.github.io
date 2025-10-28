@@ -1,6 +1,8 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: "Javascript todo app for the absolute beginner"
 pubDate: 2019-10-02
+description: "A simple todo app using vanilla JavaScript for the absolute beginner"
 tags:
 - tutorial
 - javascript

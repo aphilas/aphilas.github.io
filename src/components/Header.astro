@@ -1,11 +1,32 @@
+<style>
+nav ul {
+  list-style-type: none;
+  padding: 0 2em 1em 0;
+  display: flex;
+  gap: 1em;
+  justify-content: end;
+  align-items: center;
+}
+
+nav ul>li:first-of-type {
+  margin-right: auto;
+}
+
+nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: blue;
+}
+</style>
+
 <header>
   <nav>
     <ul>
-      <li>
-        <a href="/">
-          <img src="/avatar.png" alt="Avatar" width="64" height="64" />
-        </a>
-      </li>
+      <li><a href="/"><img src="/avatar.png" alt="Avatar" width="64" height="64" title="Home" /></a></li>
       <li><a href="/#bio">About</a></li>
       <li><a href="/blog/">Blog</a></li>
       <li><a href="/#projects">Projects</a></li>

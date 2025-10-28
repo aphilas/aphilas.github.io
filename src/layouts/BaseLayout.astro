@@ -1,24 +1,12 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
-    title?: string;
+    pageTitle?: string;
 }
 
-const { title = "Neville Omangi" } = Astro.props
+const { pageTitle } = Astro.props
 ---
-
-<style>
-main {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 100ch;
-    padding: 1rem;
-    line-height: 1.5;
-}
-</style>
 
 <html lang="en">
   <head>
@@ -27,13 +15,10 @@ main {
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <title>{ title }</title>
+    <link rel="alternate" type="application/rss+xml" title="Neville Omangi" href={new URL("rss.xml", Astro.site)} />
+    <title>{ pageTitle ? `${pageTitle} | Neville Omangi` : "Neville Omangi" }</title>
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <slot />
   </body>
 </html>

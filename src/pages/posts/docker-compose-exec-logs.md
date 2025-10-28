@@ -1,7 +1,8 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: "TIL: Detached docker exec logs"
+title: "Detached docker exec logs"
 pubDate: 2023-02-07
+description: "How to read the stdout of a docker compose exec command on a detached docker compose service"
 tags:
 - til
 - docker

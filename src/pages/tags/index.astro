@@ -1,0 +1,49 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import type { Post } from "../../types/index.ts";
+
+const posts = Object.values(
+    import.meta.glob("../posts/*.md", { eager: true })
+) as Post[];
+
+const tags = Array.from(
+    new Set(posts.flatMap((post) => post.frontmatter.tags || []))
+);
+---
+
+<style>
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+li {
+  background-color: #eee;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #0070f3;
+}
+</style>
+
+<PageLayout pageTitle="Tags">
+  <h1>Tags</h1>
+  <ul>
+    {tags.map((tag) => (
+      <li>
+        <a href={`/tags/${tag}/`}>{tag}</a>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

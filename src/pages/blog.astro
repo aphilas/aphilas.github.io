@@ -1,0 +1,14 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import type { Post } from "../types/index.ts";
+import PostList from "../components/PostList.astro";
+
+const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true })) as Post[];
+const sortedPosts = posts.toSorted((a: Post, b: Post) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
+---
+
+<PageLayout pageTitle="Blog">
+  <h1>Blog</h1>
+
+  <PostList posts={sortedPosts} />
+</PageLayout>

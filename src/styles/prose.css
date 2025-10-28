@@ -1,0 +1,32 @@
+.astro-code {
+  padding: 1em;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 2em 0;
+}
+
+blockquote {
+  border-left: 4px solid #eee;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 1em;
+  color: #666;
+}
+
+/* Inline code */
+code {
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #d63384;
+}
+
+pre code {
+  background-color: initial;
+  padding: initial;
+  border-radius: initial;
+  color: inherit;
+}

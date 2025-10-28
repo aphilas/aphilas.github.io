@@ -1,12 +1,14 @@
 ---
+layout: ../../layouts/PostLayout.astro
 pubDate: 2023-07-11
-title: "TIL: HTML Media Element Playing State"
+title: "HTML Media Element Playing State"
+description: "Using a state machine for HTML Media Element playing state"
 tags:
 - html
 - media
 ---
 
-I am building a web radio player, a frontend to RadioBrowser dubbed [Luqaimat](https://luqaimat.top). I need to know the state of the media (playing, paused, buffering, stopped et cetera) so as to display the correct icons and titles, and to start/stop a visualization. It seems trivial, but at some point I would get the wrong state (e.g. naively assuming the media is stopped on receiving a [`stalled`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/stalled_event) event). 
+I am building a web radio player, a frontend to RadioBrowser dubbed [Luqaimat](https://luqaimat.stream). I need to know the state of the media (playing, paused, buffering, stopped et cetera) so as to display the correct icons and titles, and to start/stop a visualization. It seems trivial, but at some point I would get the wrong state (e.g. naively assuming the media is stopped on receiving a [`stalled`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/stalled_event) event). 
 
 ## A state machine, sort of
 
@@ -24,7 +26,7 @@ export enum PlayingState {
 
 Despite poring over the [MDN HTMLMediaElement docs](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#events) I couldn't still understand some edge cases. The [WHATWG standard](https://html.spec.whatwg.org/multipage/media.html) was very helpful in determining the exact state of the network/media after receiving certain events. 
 
-![HTML Media Element State Machine](/img/html-media-state.svg "HTML Media Element State Machine")
+![HTML Media Element State Machine](/html-media-state.svg "HTML Media Element State Machine")
 
 I settled on the following: handle all DOM media events and state transitions in one function with a switch statement. This removed a lot of flakiness unlike my previous code where state transitions were made imperatively after certain user actions.
 
@@ -64,6 +66,6 @@ You might notice that we handle two states on `pause` - paused and stopped. HTML
 
 ---
 
-Feel free to play around with [luqaimat](https://luqaimat.top) and suggest features or report bugs.
+Feel free to play around with [luqaimat](https://luqaimat.stream) and suggest features or report bugs.
 
 Do you know of a way simplify my logic? Would you want to shed more light on anything I have addressed? Let me know on [Mastodon](https://mastodon.online/@aphilas) or shoot me an email at aphilas [underscore] [at] outlook [dot] com.

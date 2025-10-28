@@ -1,0 +1,48 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PostList from "../../components/PostList.astro";
+import type { Post } from "../../types/index.ts";
+
+interface Props {
+  posts: Post[];
+}
+
+export async function getStaticPaths() {
+  const posts = Object.values(import.meta.glob("../posts/*.md", { eager: true })) as Post[];
+
+  const sortedPosts = posts.toSorted(
+    (a: Post, b: Post) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+  );
+  
+  const tags = Array.from(
+    new Set(posts.flatMap((post) => post.frontmatter.tags || []))
+  );
+
+  return tags.map((tag) => {
+    const filteredPosts = sortedPosts.filter((post) =>
+      post.frontmatter.tags?.includes(tag)
+    );
+
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<style>
+.tag {
+  background-color: #eee;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+}
+</style>
+
+<PageLayout pageTitle="Blog">
+  <h1>Posts tagged <span class="tag">{tag}</span></h1>
+  <PostList posts={posts} />
+</PageLayout>

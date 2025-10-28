@@ -1,0 +1,106 @@
+---
+import type { Post } from "../types/index.ts";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<style>
+h2 {
+  margin: 0.5rem 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #0070f3;
+}
+
+.metadata {
+  display: flex;
+  gap: 1rem;
+  font-size: medium;
+  color: #666;
+}
+
+.metadata > div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.metadata ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.metadata a {
+  text-decoration: none;
+  color: #666;
+}
+
+.metadata a:hover {
+  color: blue;
+}
+
+.tags li {
+  background-color: #eee;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.post-list p {
+  margin: 0.5rem 0;
+}
+
+.post-list > li {
+  margin-bottom: 1rem;
+}
+</style>
+
+<ul class="post-list">{posts.map((post: Post) => (
+  <li>
+    <a href={post.url}>
+      <h2>{post.frontmatter.title}</h2>
+    </a>
+
+    {post.frontmatter.description && (
+      <p>{post.frontmatter.description}</p>
+    )}
+    
+    <div class="metadata">
+      <div class="date">
+        <!-- TODO: Use local format -->
+        <Icon name="mdi:calendar-month" title="Published On" />
+        <span title="Published On">{post.frontmatter.pubDate.toString().slice(0, 10)}</span>
+      </div>
+
+    <div class="tags">
+      <Icon name="mdi:tag-multiple" title="Tags" />
+
+      <ul>{post.frontmatter.tags.map((tag: string) => (
+        <li>
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </li>
+      ))}</ul>
+    </div>
+    </div>
+  </li>
+))}</ul>

@@ -1,6 +1,8 @@
 ---
+layout: ../../layouts/PostLayout.astro
 pubDate: 2023-01-23
-title: "TIL: Python Output Buffering"
+title: "Python Output Buffering"
+description: "Python output buffering and how to disable it"
 tags: 
 - til
 - python
