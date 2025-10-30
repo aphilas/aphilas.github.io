@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import type { Post } from "../types/index.ts";
-import PostList from "../components/PostList.astro";
+import SimplePostList from "../components/SimplePostList.astro";
 
 const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true })) as Post[];
 const sortedPosts = posts.toSorted((a: Post, b: Post) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
@@ -9,16 +9,86 @@ const recentPosts = sortedPosts.slice(0, 3);
 ---
 
 <style>
-  #bio hgroup {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+#bio hgroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  #bio h1 {
-    font-size: 5em;
-    font-weight: 900;
+#bio h1 {
+  font-size: 5em;
+  font-weight: 900;
+}
+
+#projects ul {
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: repeat(2, 2em 2fr);
+  grid-template-rows: repeat(2, auto auto);
+}
+
+@media (max-width: 600px) {
+  #projects ul {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
+}
+
+#projects li {
+  margin-bottom: 1em;
+  grid-column: span 2;
+  grid-row: span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: subgrid;
+  grid-template-areas: 
+    "logo header"
+    ". description";
+}
+
+#projects li > img, #projects li .icon-wrapper {
+  grid-area: logo;
+}
+
+#projects li > p {
+  grid-area: description;
+  margin: 0;
+}
+
+#projects li > hgroup {
+  grid-area: header;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.icon-github {
+  display: flex;
+  align-items: center;
+}
+
+#projects li h3 {
+  margin: 0;
+}
+
+#projects li img {
+  filter: grayscale(1);
+}
+
+#projects li img:hover {
+  filter: none;
+  transition: filter 0.2s ease-in;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 8px;
+  background-color: #fff;
+}
 </style>
 
 <PageLayout>
@@ -27,12 +97,12 @@ const recentPosts = sortedPosts.slice(0, 3);
       <h1>Neville Omangi</h1>
     </hgroup>
 
-    <h3>Fullstack Engineer</h3>
+    <h3>Software Engineer</h3>
 
     <div>
       <p>
-        I am a Software Engineer with 3+ years of experience architecting,
-        developing, and deploying products for startups and enterprises alike.
+        I am a Software Engineer primarily working on the Backend and Infrastructure.
+        I am also a Distributed Systems dilettante, and an Open Source enthusiast.
       </p>
     </div>
   </section>
@@ -40,10 +110,53 @@ const recentPosts = sortedPosts.slice(0, 3);
   <section id="posts">
     <h2>Recent Posts</h2>
     
-    <PostList posts={recentPosts} />
+    <SimplePostList posts={recentPosts} />
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
+
+    <ul>
+      <li>
+        <img src="/images/scholarbase.png" alt="Scholarbase Logo" height="32" width="32">
+        <hgroup>
+          <a href="https://scholarbase.io">
+            <h3>Scholarbase</h3>
+          </a>
+        </hgroup>
+        <p>A comprehensive source of academic scholarships</p>
+      </li>
+      <li>
+        <img src="/images/luqaimat.png" alt="Luqaimat Logo" height="32" width="32">
+        <hgroup>
+          <a href="https://luqaimat.stream">
+            <h3>Luqaimat</h3>
+          </a>
+        </hgroup>
+        <p>A delightful online radio web player</p>
+      </li>
+      <li>
+        <div class="icon-wrapper">
+          <img src="/images/fastnote.png" alt="Fastnote Logo" height="18" width="18">
+        </div>
+        <hgroup>
+          <a href="https://fast-note.netlify.app/">
+            <h3>Fastnote</h3>
+          </a>
+        </hgroup>
+        <p>Minimalist local notepad</p>
+      </li>
+      <li>
+        <div class="icon-wrapper">
+          <img src="/images/litesiem.png" alt="Litesiem Logo" height="24" width="24">
+        </div>
+         <hgroup>
+            <a href="/projects/litesiem">
+              <h3>Litesiem</h3>
+            </a>
+         </hgroup>
+        <p>Lightweight <a href="https://en.wikipedia.org/wiki/Security_information_and_event_management">SIEM</a> software</p>
+      </li>
+    </ul>
   </section>
 </PageLayout>

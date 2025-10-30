@@ -1,6 +1,7 @@
 ---
 import type { Post } from "../types/index.ts";
 import { Icon } from "astro-icon/components";
+import Tags from "./Tags.astro";
 
 interface Props {
   posts: Post[];
@@ -14,56 +15,17 @@ h3 {
   margin: 0.5rem 0;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-a:hover {
-  color: #0070f3;
-}
-
 .metadata {
   display: flex;
   gap: 1rem;
   font-size: medium;
-  color: #666;
+  color: light-dark(var(--dark-gray-3), var(--light-gray-2));
 }
 
 .metadata > div {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-}
-
-.metadata ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.metadata a {
-  text-decoration: none;
-  color: #666;
-}
-
-.metadata a:hover {
-  color: var(--link-hover-color);
-}
-
-.tags li {
-  background-color: #eee;
-  padding: 0.1rem 0.5rem;
-  border-radius: 0.25rem;
 }
 
 .post-list p {
@@ -87,7 +49,6 @@ a:hover {
     
     <div class="metadata">
       <div class="date">
-        <!-- TODO: Use local format -->
         <Icon name="mdi:calendar-month" title="Published On" />
         <span title="Published On">{post.frontmatter.pubDate.toString().slice(0, 10)}</span>
       </div>
@@ -95,11 +56,7 @@ a:hover {
     <div class="tags">
       <Icon name="mdi:tag-multiple" title="Tags" />
 
-      <ul>{post.frontmatter.tags.map((tag: string) => (
-        <li>
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </li>
-      ))}</ul>
+      <Tags tags={post.frontmatter.tags} />
     </div>
     </div>
   </li>

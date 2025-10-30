@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Tags from '../components/Tags.astro';
 import { Icon } from "astro-icon/components";
 import "../styles/global.css";
 import "../styles/prose.css";
@@ -22,33 +23,21 @@ header, footer {
 </style>
 
 <style>
-:root {
+#root {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, var(--main-max-width)) 1fr;
+  gap: var(--gutter);
+
   --gutter: 2rem;
   --main-max-width: 80ch;
   --aside-width: 20rem;
   --aside-top: 4em;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-a:hover {
-  color: var(--link-hover-color);
-}
-
-#root {
-  display: grid;
-  grid-template-columns: 1fr minmax(0, var(--main-max-width)) 1fr;
-  gap: var(--gutter);
-  align-items: start;
-}
-
 main {
   grid-column: 2 / 3;
   max-width: var(--main-max-width);
-  width: 100%;
+  padding: 0 1rem;
 }
 
 aside {
@@ -56,56 +45,43 @@ aside {
   position: sticky;
   top: var(--aside-top);
   justify-self: center;
+  padding: 0 2rem;
 }
 
 aside > div {
   max-width: var(--aside-width);
 }
 
-@media (max-width: 880px) {
-  .layout {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+@media (max-width: 600px) {
+  #root {
+    /* See: https://css-tricks.com/preventing-a-grid-blowout/ */
+    grid-template-columns: minmax(0, 1fr);
+    --gutter: 0;
   }
 
   main {
     grid-column: auto;
+    width: 100%;
   }
 
   aside {
     grid-column: auto;
     position: static;
+    justify-self: initial;
+    padding: 0 1rem;
   }
 }
 
-aside ul {
-  padding: 0;
-  list-style: none;
-}
-
-aside li {
-  margin: 0.5rem 0;
-}
-
-.aside a {
-  text-decoration: none;
-  color: #666;
-}
-
-.aside a:hover {
-  color: var(--link-hover-color);
-}
-
-li.level-3 {
+aside li.level-3 {
   padding-left: 0.5em;
 }
-li.level-4 {
+aside li.level-4 {
   padding-left: 1em;
 }
-li.level-5 {
+aside li.level-5 {
   padding-left: 1.5em;
 }
-li.level-6 {
+aside li.level-6 {
   padding-left: 2em;
 }
 
@@ -113,7 +89,7 @@ li.level-6 {
   display: flex;
   gap: 1rem;
   font-size: medium;
-  color: #666;
+  color: light-dark(#666, #aaa);
 }
 
 .metadata > div {
@@ -122,28 +98,8 @@ li.level-6 {
   gap: 0.25rem;
 }
 
-.metadata ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 0.25rem;
-}
 
-.metadata a {
-  text-decoration: none;
-  color: #666;
-}
 
-.metadata a:hover {
-  color: var(--link-hover-color);
-}
-
-.tags li {
-  background-color: #eee;
-  padding: 0.1rem 0.5rem;
-  border-radius: 0.25rem;
-}
 </style>
 
 <BaseLayout pageTitle={frontmatter.title}>
@@ -154,7 +110,7 @@ li.level-6 {
       <div class="toc">
         <h3>Contents</h3>
 
-        <ul>
+        <ul class="ul">
           {
             headings.map((heading: Heading) => (
               <li class={`level-${heading.depth}`}>
@@ -167,13 +123,12 @@ li.level-6 {
     </aside>
 
     <main>
-      <article>
+      <div class="article-header">
         <hgroup>
           <h1>{frontmatter.title}</h1>
 
           <div class="metadata">
             <div class="date">
-              <!-- TODO: Use local format -->
               <Icon name="mdi:calendar-month" title="Published On" />
               <span title="Published On"
                 >{frontmatter.pubDate.toString().slice(0, 10)}</span
@@ -182,22 +137,15 @@ li.level-6 {
 
             <div class="tags">
               <Icon name="mdi:tag-multiple" title="Tags" />
-
-              <ul>
-                {
-                  frontmatter.tags.map((tag: string) => (
-                    <li>
-                      <a href={`/tags/${tag}`}>{tag}</a>
-                    </li>
-                  ))
-                }
-              </ul>
+              <Tags tags={frontmatter.tags} />
             </div>
           </div>
         </hgroup>
 
         <hr />
+      </div>
 
+      <article>
         <slot />
       </article>
     </main>

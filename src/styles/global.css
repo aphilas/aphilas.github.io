@@ -1,7 +1,30 @@
 :root {
-  --base-color: #111;
-  --link-color: #111;
-  --link-hover-color: #0070f3;
+  color-scheme: light dark;
+  
+  /* The higher the darker */
+  --light-gray-1: #eee;
+  --light-gray-2: #ccc;
+  --light-gray-3: #aaa;
+
+  /* The higher the lighter */
+  --dark-gray-1: #111;
+  --dark-gray-2: #333;
+  --dark-gray-3: #555;
+
+  /* Icon colors */
+  --rss-color: #f60;
+  --mastodon-color: #6364ff;
+  --bluesky-color: #1da1f2;
+  --email-color: #d44638;
+  --github-color: #333;
+  --github-color-dark: #fff;
+
+  --background: light-dark(#fff, #222);
+  --color: light-dark(#111, #eee);
+  --link-color: var(--color);
+  --link-hover-color: light-dark(#0070f3, #3291ff);
+  
+  --mobile-breakpoint: 600px;
 }
 
 html {
@@ -9,15 +32,15 @@ html {
 }
 
 body {
-  background: #fff;
-  color: #111;
+  background: var(--background);
+  color: var(--color);
   line-height: 1.4;
+  margin: 0;
 }
 
 * {
   box-sizing: border-box;
 }
-
 
 /* Fix monospace font size */
 
@@ -45,4 +68,21 @@ h2 {
 
 h3 {
   font-size: 1.5em;
+}
+
+/* Normalize */
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover-color);
 }

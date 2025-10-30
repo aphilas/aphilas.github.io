@@ -68,4 +68,4 @@ You might notice that we handle two states on `pause` - paused and stopped. HTML
 
 Feel free to play around with [luqaimat](https://luqaimat.stream) and suggest features or report bugs.
 
-Do you know of a way simplify my logic? Would you want to shed more light on anything I have addressed? Let me know on [Mastodon](https://mastodon.online/@aphilas) or shoot me an email at aphilas [underscore] [at] outlook [dot] com.
+Do you know of a way simplify my logic? Would you want to shed more light on anything I have addressed? Let me know on [Mastodon](https://mastodon.online/@aphilas) or shoot me an [email](/contact#email).

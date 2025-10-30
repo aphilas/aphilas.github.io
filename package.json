@@ -9,8 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.5.7",
     "@astrojs/rss": "^4.0.13",
-    "astro": "^5.15.1"
+    "astro": "^5.15.1",
+    "astro-expressive-code": "^0.41.3"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",

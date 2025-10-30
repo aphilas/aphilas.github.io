@@ -1,0 +1,21 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import { Icon } from "astro-icon/components";
+import { YouTube } from '@astro-community/astro-embed-youtube';
+---
+
+<PageLayout pageTitle="LiteSIEM">
+  <section>
+    <h1>LiteSIEM</h1>
+  
+    <p>LiteSIEM <a class="icon-github" href="https://github.com/litesiem">
+        <Icon name="mdi:github" title="GitHub" height={16} width={16} />
+      </a> is an open-source Security Information and Event Management (SIEM) software</p>
+
+    <h3>Demo</h3>
+    <YouTube 
+      id="https://youtu.be/-bT_YVcuSdE"  
+      poster="/images/litesiem-poster.jpg"  
+    />
+  </section>
+</PageLayout>
