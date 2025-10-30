@@ -21,10 +21,10 @@ const { pageTitle } = Astro.props
     
     <meta name="description" content="Neville Omangi's personal website and blog." />
     <meta name="og:type" content="website" />
-    <meta property="og:url" content="https://nevilleomangi.com/">
+    <meta property="og:url" content={Astro.site} />
     <meta property="og:title" content="Neville Omangi">
     <meta property="og:description" content="Neville Omangi's personal website and blog.">
-    <meta property="og:image" content="https://nevilleomangi.com/avatar.png">
+    <meta property="og:image" content={new URL("avatar.png", Astro.site)}>
   </head>
   <body>
     <slot />

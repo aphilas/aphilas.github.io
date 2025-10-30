@@ -5,7 +5,7 @@ import expressiveCode from 'astro-expressive-code';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://nevilleomangi.com',
+  site: 'https://aphilas.top/',
   integrations: [icon(), expressiveCode({
     frames: {
       showCopyToClipboardButton: false,
