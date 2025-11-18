@@ -5,7 +5,8 @@ import expressiveCode from 'astro-expressive-code';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://aphilas.top/',
+  // TODO: Make dynamic
+  site: 'https://aphilas.github.io/',
   integrations: [icon(), expressiveCode({
     frames: {
       showCopyToClipboardButton: false,
