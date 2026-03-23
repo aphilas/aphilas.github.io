@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "aphilas.github.io",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,15 +9,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.5.7",
-    "@astrojs/rss": "^4.0.15",
-    "astro": "^5.17.3",
-    "astro-expressive-code": "^0.41.3"
+    "@astro-community/astro-embed-youtube": "^0.5.10",
+    "@astrojs/rss": "^4.0.17",
+    "astro": "^6.0.8",
+    "astro-expressive-code": "^0.41.7"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/ri": "^1.2.6",
+    "@iconify-json/ri": "^1.2.10",
     "astro-icon": "^1.1.5",
-    "sanitize-html": "^2.17.0"
+    "sanitize-html": "^2.17.2"
   }
 }
